@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-gateway
+  namespace: prometheus-agi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: prometheus-gateway
+  template:
+    metadata:
+      labels:
+        app: prometheus-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: ghcr.io/prometheus-agi/gateway:latest
+          ports:
+            - containerPort: 3001
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          readinessProbe:
+            httpGet:
+              path: /api/v1/swarm/state
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/swarm/state
+              port: 3001
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: prometheus-secrets
+                  key: database_url
+            - name: PROMETHEUS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: prometheus-secrets
+                  key: api_key

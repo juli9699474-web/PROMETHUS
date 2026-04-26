@@ -1,0 +1,28 @@
+[workspace]
+members = [
+  "core/prometheus-runtime",
+  "core/prometheus-memory",
+  "core/prometheus-forge",
+  "core/prometheus-wasm",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+version = "0.1.0"
+
+[workspace.dependencies]
+anyhow = "1"
+async-trait = "0.1"
+atomic_float = "1"
+chrono = { version = "0.4", features = ["serde"] }
+dashmap = "6"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+prost = "0.13"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+uuid = { version = "1", features = ["v7", "serde"] }

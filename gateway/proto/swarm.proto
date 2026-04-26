@@ -1,0 +1,10 @@
+syntax = "proto3";
+package prometheus.v1;
+
+message SwarmStateRequest {}
+
+message SwarmStateResponse {
+  int32 active_agents = 1;
+  double average_fitness = 2;
+  string mode = 3;
+}

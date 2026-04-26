@@ -1,0 +1,12 @@
+syntax = "proto3";
+package prometheus.v1;
+
+message ForgeToolRequest {
+  string description = 1;
+  string signature_json = 2;
+}
+
+message ForgeToolResponse {
+  string tool_id = 1;
+  bool validated = 2;
+}

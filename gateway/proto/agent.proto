@@ -1,0 +1,9 @@
+syntax = "proto3";
+package prometheus.v1;
+
+message Agent {
+  string id = 1;
+  string status = 2;
+  double fitness_score = 3;
+  double token_balance = 4;
+}

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-web
+  namespace: prometheus-agi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: prometheus-web
+  template:
+    metadata:
+      labels:
+        app: prometheus-web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/prometheus-agi/web:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "750m"
+              memory: "768Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://prometheus-gateway:3001"

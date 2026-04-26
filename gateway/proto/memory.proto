@@ -1,0 +1,17 @@
+syntax = "proto3";
+package prometheus.v1;
+
+message KnowledgeQueryRequest {
+  string question = 1;
+  int32 top_k = 2;
+}
+
+message KnowledgeChunk {
+  string id = 1;
+  string content = 2;
+  double confidence = 3;
+}
+
+message KnowledgeQueryResponse {
+  repeated KnowledgeChunk chunks = 1;
+}

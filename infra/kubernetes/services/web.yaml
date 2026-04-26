@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-web
+  namespace: prometheus-agi
+spec:
+  selector:
+    app: prometheus-web
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
