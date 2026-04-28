@@ -1,0 +1,16 @@
+{
+  "name": "promethus",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "npm --prefix web install",
+    "migrate": "bash scripts/migrate.sh",
+    "smoke": "bash scripts/smoke-test.sh",
+    "gateway": "go run ./gateway/cmd/gateway",
+    "web": "npm --prefix web run dev",
+    "dev": "concurrently -n gateway,web -c red,cyan \"npm run gateway\" \"npm run web\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

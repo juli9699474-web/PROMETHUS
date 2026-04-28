@@ -1,22 +1,113 @@
-# PROMETHEUS AGI OS
+## PROMETHUS
 
-The swarm thinks. The swarm learns. The swarm evolves.
+<p align="center">
+  <img src="assets/logo.svg" alt="PROMETHUS Logo" width="120" />
+</p>
 
-## Quick Start
+<p align="center">
+  <b>The swarm thinks. The swarm learns. The swarm evolves.</b><br/>
+  A simple and universal swarm intelligence engine — mission-control UI + replayable event forensics.
+</p>
+
+<p align="center">
+  <a href="https://github.com/juli9699474-web/PROMETHUS">GitHub</a>
+  ·
+  <a href="docs/getting-started.md">Getting Started</a>
+  ·
+  <a href="docs/architecture.md">Architecture</a>
+  ·
+  <a href="docs/api-reference.md">API Reference</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/juli9699474-web/PROMETHUS/stargazers">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/juli9699474-web/PROMETHUS?style=flat" />
+  </a>
+  <a href="https://github.com/juli9699474-web/PROMETHUS/watchers">
+    <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/juli9699474-web/PROMETHUS?style=flat" />
+  </a>
+  <a href="https://github.com/juli9699474-web/PROMETHUS/fork">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/juli9699474-web/PROMETHUS?style=flat" />
+  </a>
+</p>
+
+## ⚡ Overview
+
+PROMETHUS is an agentic swarm OS scaffold focused on one thing: **observable, replayable swarm behavior**.
+You can run a local “mission control”, create agents/tasks, watch the event stream live, then rewind and inspect
+what happened with filters, cursor pagination, and metrics (latency + percentiles).
+
+## 🌐 What you can do today
+
+- **Run a local mission control**: dashboard + gateway
+- **Create agents and assign tasks** via REST
+- **Watch live swarm events** over WebSocket
+- **Replay history** with filters (`eventType`, `agentId`, time range) + cursor paging
+- **Observe replay system health**: rate limits, durable metrics, percentiles (p50/p95/p99)
+
+## 🔄 Workflow
+
+1. Start infrastructure (Postgres, Redis, etc.)
+2. Run migrations
+3. Start gateway (Go) + dashboard (Next.js)
+4. Create agents / assign tasks
+5. Inspect live + replay modes, export findings
+
+## 🚀 Quick Start
+
+### Option 1: Source deployment (recommended)
+
+Prerequisites:
+- Node.js 18+
+- Go 1.22+
+- Docker + Docker Compose
+
+```bash
+cp .env.example .env
+make setup
+make migrate
+npm install
+npm run dev
+```
+
+Run a quick validation:
+
+```bash
+npm run smoke
+```
+
+Open:
+- **Dashboard**: `http://localhost:3000`
+- **Gateway**: `http://localhost:3001`
+- **Swarm WS**: `ws://localhost:3001/ws/swarm`
+
+### Option 2: Docker (infra only)
 
 ```bash
 make setup
-make all
+make migrate
 ```
 
-## Current Status
+Then run gateway + web with `npm run dev`.
 
-This repository now includes a Phase-1 executable skeleton:
+## 📸 Screenshots
 
-- Rust runtime with genome, market, consciousness, evolution, and UAP modules
-- Python evolution and tool forge scaffolding
-- Go gateway with core endpoints
-- Base docs and compose stack
+- Add screenshots/GIFs to `docs/diagrams/` and link them here:
+  - `docs/diagrams/dashboard.png`
+  - `docs/diagrams/replay.png`
+  - `docs/diagrams/metrics.png`
+
+## 🎬 Demo
+
+- Record a short GIF of the dashboard event stream + replay mode and embed it at the top of this README.
+
+## 🔐 API Key (optional, recommended)
+
+Set `PROMETHEUS_API_KEY` to protect replay metrics endpoints. Send it as `X-API-Key`.
+
+## 📦 Deploy (Kubernetes baseline)
+
+Manifests live under `infra/kubernetes/`.
 
 ## Phase 2 Added
 
